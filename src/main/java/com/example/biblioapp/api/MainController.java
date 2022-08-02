@@ -1,5 +1,7 @@
-package com.example.biblioapp;
+package com.example.biblioapp.api;
 
+import com.example.biblioapp.domain.bookModel.BookModel;
+import com.example.biblioapp.Repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,7 @@ public class MainController {
     @PostMapping(path = "/add")
     public @ResponseBody String addNewBook(@RequestParam String name,
                                            @RequestParam String isbn){
-        Book book = new Book();
+        BookModel book = new BookModel();
         book.setName(name);
         book.setISBN(isbn);
         bookRepository.save(book);
@@ -26,7 +28,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Book> getAllBooks() {
+    public @ResponseBody Iterable<BookModel> getAllBooks() {
         return bookRepository.findAll();
     }
 }
