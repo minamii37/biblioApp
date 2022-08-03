@@ -1,8 +1,9 @@
 package com.example.biblioapp.Repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.biblioapp.domain.book.BookEntity;
+import java.util.List;
 
-import com.example.biblioapp.domain.bookModel.BookModel;
-
-public interface BookRepository extends CrudRepository<BookModel, Integer> {
+public interface BookRepository extends JpaRepository<BookEntity, Integer> {
+    List<BookEntity> findAll();
 }
