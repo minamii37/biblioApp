@@ -1,32 +1,33 @@
-package com.example.biblioapp.domain.book;
+package com.example.biblioapp.api.viewmodel;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
 @Data
-public class BookEntity {
-    @Id
+public class BookViewModel {
     private String id;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotBlank
     private String name;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotBlank
     private String isbn13;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotBlank
     private String author;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotBlank
     private String publisher;
 
-    @Column(nullable = false)
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
 }
