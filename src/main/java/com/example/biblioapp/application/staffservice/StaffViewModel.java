@@ -1,4 +1,4 @@
-package com.example.biblioapp.api.viewmodel;
+package com.example.biblioapp.application.staffservice;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
