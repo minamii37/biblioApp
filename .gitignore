@@ -35,15 +35,14 @@ build/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+/react-front/.pnp
 .pnp.js
 
 # testing
-/coverage
+/react-front/coverage
 
 # production
-/build
+/react-front/build
 
 # misc
 .DS_Store
