@@ -1,12 +1,13 @@
 package com.example.biblioapp.domain.book;
 
 import lombok.Data;
+import lombok.Getter;
 
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
+@Getter
 public class BookDomain {
     private String bookId;
 
@@ -26,6 +27,7 @@ public class BookDomain {
                       String author,
                       String publisher,
                       LocalDate publicationDate){
+        // IDの指定がない場合は、IDを割り振る
         if(bookId == null || bookId.isEmpty()){
             this.bookId = UUID.randomUUID().toString();
         } else{

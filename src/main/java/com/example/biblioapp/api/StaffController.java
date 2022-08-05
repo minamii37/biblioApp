@@ -22,7 +22,8 @@ public class StaffController {
     public @ResponseBody String addNewStaff(@RequestBody @Validated StaffViewModel view){
         StaffEntity staff = new StaffEntity(
                 UUID.randomUUID().toString(),
-                view.getName(),
+                view.getFirstName(),
+                view.getFamilyName(),
                 LocalDateTime.now());
         staffRepositoryJpa.save(staff);
 

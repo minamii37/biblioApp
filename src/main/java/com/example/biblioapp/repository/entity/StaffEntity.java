@@ -14,21 +14,25 @@ public class StaffEntity {
     private String staffId;
 
     @Column(nullable = false)
-    private String staffName;
+    private String firstName;
+
+    @Column(nullable = false)
+    private String familyName;
 
     @Column(nullable = false)
     private LocalDateTime createDate;
 
     protected StaffEntity () {
-
     }
 
     public StaffEntity(
             String staffId,
-            String staffName,
+            String firstName,
+            String familyName,
             LocalDateTime createDate){
         this.staffId = staffId;
-        this.staffName = staffName;
+        this.firstName = firstName;
+        this.familyName = familyName;
         this.createDate = createDate;
     }
 
