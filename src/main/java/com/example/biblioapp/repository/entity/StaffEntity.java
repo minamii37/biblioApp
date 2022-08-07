@@ -14,10 +14,10 @@ public class StaffEntity {
     private String staffId;
 
     @Column(nullable = false)
-    private String firstName;
+    private String familyName;
 
     @Column(nullable = false)
-    private String familyName;
+    private String firstName;
 
     @Column(nullable = false)
     private LocalDateTime createDate;
@@ -27,12 +27,12 @@ public class StaffEntity {
 
     public StaffEntity(
             String staffId,
-            String firstName,
             String familyName,
+            String firstName,
             LocalDateTime createDate){
         this.staffId = staffId;
-        this.firstName = firstName;
         this.familyName = familyName;
+        this.firstName = firstName;
         this.createDate = createDate;
     }
 

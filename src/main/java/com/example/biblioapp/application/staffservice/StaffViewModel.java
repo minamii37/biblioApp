@@ -1,22 +1,16 @@
 package com.example.biblioapp.application.staffservice;
 
 import com.example.biblioapp.domain.staff.StaffDomain;
-import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
 public class StaffViewModel {
     private String id;
 
-    @NotNull
-    @NotBlank
     private String firstName;
 
-    @NotNull
-    @NotBlank
     private String familyName;
 
     private LocalDateTime createDate;
@@ -32,19 +26,22 @@ public class StaffViewModel {
         this.createDate = createDate;
     }
 
+    public StaffViewModel (){
+    }
+
     public StaffViewModel fromDomain(StaffDomain domain){
         return new StaffViewModel(
                 domain.getStaffId(),
-                domain.getFirstName(),
                 domain.getFamilyName(),
+                domain.getFirstName(),
                 domain.getCreateDate());
     }
 
     public StaffDomain fromView(){
         return new StaffDomain(
                 this.id,
-                this.firstName,
                 this.familyName,
+                this.firstName,
                 this.createDate);
     }
 }

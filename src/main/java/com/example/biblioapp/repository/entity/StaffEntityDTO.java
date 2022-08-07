@@ -6,16 +6,16 @@ public class StaffEntityDTO {
     public static StaffEntity fromDomain(StaffDomain domain){
         return new StaffEntity(
                 domain.getStaffId(),
-                domain.getFirstName(),
                 domain.getFamilyName(),
+                domain.getFirstName(),
                 domain.getCreateDate());
     }
 
     public static StaffDomain fromEntity(StaffEntity entity){
         return new StaffDomain(
                 entity.getStaffId(),
-                entity.getFirstName(),
                 entity.getFamilyName(),
+                entity.getFirstName(),
                 entity.getCreateDate());
     }
 }

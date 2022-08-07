@@ -5,7 +5,7 @@ import com.example.biblioapp.domain.staff.StaffDomain;
 import java.util.ArrayList;
 
 public interface IStaffRepository {
-    ArrayList<StaffDomain> getStaffs();
+    ArrayList<StaffDomain> getAllStaffs ();
 
-    void save(StaffDomain bookDomain);
+    void save(StaffDomain staffDomain);
 }
