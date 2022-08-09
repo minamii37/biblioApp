@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(path = "/biblioApp/book")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BookController {
 
     private final IBookService bookService;
