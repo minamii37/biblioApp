@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-const ApiFetch = () => {
+interface IPost {
+    name: String
+}
 
-    const [posts, setPosts] = useState([])
+const ApiFetch = () => {
+    const [posts, setPosts] = useState<IPost[]>([])
 
     useEffect(() => {
         axios.get('http://localhost:8080/biblioApp/book/all')
@@ -16,7 +19,7 @@ const ApiFetch = () => {
         <div>
             <ul>
                 {
-                    posts.map(post => <li key={post.name}> {post.name} </li>)
+                    posts.map(post => <li> {post.name} </li>)
                 }
             </ul>
 

@@ -7,22 +7,13 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
 
-function index() {
-    const element = (
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    );
-    root.render(element);
-}
-
-setInterval(index, 1000);
+const element = (
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
+root.render(element);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
