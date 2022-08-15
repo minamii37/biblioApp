@@ -21,6 +21,8 @@ public class BookViewModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
 
+    private String bookImgPath;
+
     public BookViewModel(){
     }
 
@@ -29,13 +31,15 @@ public class BookViewModel {
                           String isbn13,
                           String author,
                           String publisher,
-                          LocalDate publicationDate) {
+                          LocalDate publicationDate,
+                          String bookImgPath) {
         this.id = id;
         this.name = name;
         this.isbn13 = isbn13;
         this.author = author;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
+        this.bookImgPath = bookImgPath;
     }
 
     public BookViewModel fromDomain(BookDomain domain){
@@ -45,6 +49,7 @@ public class BookViewModel {
         this.author = domain.getAuthor();
         this.publisher = domain.getPublisher();
         this.publicationDate = domain.getPublicationDate();
+        this.bookImgPath = domain.getBookImgPath();
 
         return this;
     }
@@ -56,6 +61,7 @@ public class BookViewModel {
                 this.isbn13,
                 this.author,
                 this.publisher,
-                this.publicationDate);
+                this.publicationDate,
+                "");
     }
 }

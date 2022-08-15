@@ -30,6 +30,8 @@ public class BookEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
 
+    private String bookImgUrl;
+
     protected BookEntity () {
     }
 
@@ -38,12 +40,14 @@ public class BookEntity {
                        String isbn13,
                        String author,
                        String publisher,
-                       LocalDate publicationDate) {
+                       LocalDate publicationDate,
+                       String bookImgUrl) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.isbn13 = isbn13;
         this.author = author;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
+        this.bookImgUrl = bookImgUrl;
     }
 }

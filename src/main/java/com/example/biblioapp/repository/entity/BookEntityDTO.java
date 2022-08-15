@@ -10,7 +10,8 @@ public class BookEntityDTO {
                 bookDomain.getIsbn13(),
                 bookDomain.getAuthor(),
                 bookDomain.getPublisher(),
-                bookDomain.getPublicationDate());
+                bookDomain.getPublicationDate(),
+                bookDomain.getBookImgPath());
     }
 
     public static BookDomain fromEntity(BookEntity bookEntity){
@@ -20,6 +21,7 @@ public class BookEntityDTO {
                 bookEntity.getIsbn13(),
                 bookEntity.getAuthor(),
                 bookEntity.getPublisher(),
-                bookEntity.getPublicationDate());
+                bookEntity.getPublicationDate(),
+                bookEntity.getBookImgUrl());
     }
 }

@@ -22,6 +22,7 @@ public class BookService implements IBookService{
     public String addNewBook (BookViewModel view) {
         var domain = createNewBookDomainFromView(view);
         domain.checkForSaving();
+        domain.getBookImg();
         bookRepository.save(domain);
 
         return "Saved";
@@ -50,6 +51,7 @@ public class BookService implements IBookService{
                 view.getIsbn13(),
                 view.getAuthor(),
                 view.getPublisher(),
-                view.getPublicationDate());
+                view.getPublicationDate(),
+                "");
     }
 }
