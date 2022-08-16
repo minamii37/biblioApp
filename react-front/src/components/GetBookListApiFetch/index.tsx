@@ -10,7 +10,7 @@ interface IBook {
     bookImgPath: String,
 }
 
-const ApiFetch = () => {
+const GetBookListApiFetch = () => {
     const [posts, setPosts] = useState<IBook[]>([])
 
     useEffect(() => {
@@ -22,6 +22,7 @@ const ApiFetch = () => {
 
     return (
         <div>
+            <h1>蔵書一覧</h1>
             <table>
                 {posts.map((post) =>
                     <tr>
@@ -42,4 +43,4 @@ const ApiFetch = () => {
     )
 }
 
-export default ApiFetch
+export default GetBookListApiFetch;
