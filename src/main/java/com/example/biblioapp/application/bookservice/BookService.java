@@ -1,14 +1,13 @@
 package com.example.biblioapp.application.bookservice;
 
+import com.example.biblioapp.application.ResponseModel;
 import com.example.biblioapp.domain.book.BookDomain;
 import com.example.biblioapp.domain.repository.IBookRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class BookService implements IBookService{
@@ -19,13 +18,31 @@ public class BookService implements IBookService{
     }
 
     @Override
-    public String addNewBook (BookViewModel view) {
+    public ResponseModel<BookViewModel> addNewBook (BookViewModel view) {
         var domain = createNewBookDomainFromView(view);
-        domain.checkForSaving();
-        domain.getBookImg();
-        bookRepository.save(domain);
+        try{
+            domain.checkForSaving();
+            domain.getBookImg();
+            bookRepository.save(domain);
+        } catch (Exception e) {
+//            HACK:メッセージだけじゃなく、param返却する自作例外を作成して、不正理由を明確にしたい
+//            Map<String, String> map = new HashMap<>();
+//            map.put( "Message", e.getMessage());
+//            map.put( "param", "aaa" );
+            return new ResponseModel<>(
+                    new ArrayList<>(),
+                    ResponseEntity.badRequest().body(e.getMessage())
+            );
+        }
 
-        return "Saved";
+        var resViewList = new ArrayList<BookViewModel>();
+        resViewList.add(new BookViewModel().fromDomain(domain));
+//        Map<String, String> map = new HashMap<>();
+//        map.put( "Message", "");
+        return new ResponseModel<>(
+                resViewList,
+                ResponseEntity.ok().body("")
+        );
     }
 
     @Override

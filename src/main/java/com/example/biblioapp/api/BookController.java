@@ -1,9 +1,9 @@
 package com.example.biblioapp.api;
 
+import com.example.biblioapp.application.ResponseModel;
 import com.example.biblioapp.application.bookservice.BookViewModel;
 import com.example.biblioapp.application.bookservice.IBookService;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -18,7 +18,7 @@ public class BookController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewBook(@RequestBody @Validated BookViewModel view){
+    public @ResponseBody ResponseModel<BookViewModel> addNewBook(@RequestBody BookViewModel view){
         return bookService.addNewBook(view);
     }
 

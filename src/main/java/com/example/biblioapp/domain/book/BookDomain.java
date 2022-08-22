@@ -59,7 +59,6 @@ public class BookDomain {
     }
 
     public void getBookImg() {
-
         final String endpoint = "https://api.openbd.jp/v1/get";
         final String url = endpoint + "?isbn=" + this.isbn13;
 
@@ -69,6 +68,9 @@ public class BookDomain {
 
         Object[] responseBody = response.getBody();
         LinkedHashMap<String, Object> body = (LinkedHashMap<String, Object>) responseBody[0];
+        if (body == null) {
+            throw new IllegalArgumentException("対象のISBN13は存在しないか不正です");
+        }
         var summary = (LinkedHashMap<String, Object>)body.get("summary");
 
         // 書影が取得できない場合はダミーURLを入れる

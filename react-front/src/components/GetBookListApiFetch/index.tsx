@@ -1,40 +1,39 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-interface IBook {
-    name: String,
-    author: String,
-    publisher: String,
+interface IBookInfo {
+    name: string,
+    author: string,
+    publisher: string,
     publicationDate: Date,
-    isbn13: String,
-    bookImgPath: String,
+    isbn13: string,
+    bookImgPath: string,
 }
 
 const GetBookListApiFetch = () => {
-    const [posts, setPosts] = useState<IBook[]>([])
+    const [bookInfos, setBookInfos] = useState<IBookInfo[]>([])
 
     useEffect(() => {
         axios.get('http://localhost:8080/biblioApp/book/all')
             .then(res => {
-                setPosts(res.data)
+                setBookInfos(res.data)
             })
     }, [])
 
     return (
         <div>
-            <h1>蔵書一覧</h1>
             <table>
-                {posts.map((post) =>
+                {bookInfos.map((bookInfo) =>
                     <tr>
                         <td>
-                            <img src={post.bookImgPath.toString()} height="150" alt="書影"/>
+                            <img src={bookInfo.bookImgPath.toString()} height="150" alt="書影"/>
                         </td>
                         <td>
-                            <div>{post.name}</div>
-                            <div>{post.author}</div>
-                            <div>出版社：{post.publisher}</div>
-                            <div>出版日：{post.publicationDate.toLocaleString()}</div>
-                            <div>ISBN13：{post.isbn13}</div>
+                            <div>{bookInfo.name}</div>
+                            <div>{bookInfo.author}</div>
+                            <div>出版社：{bookInfo.publisher}</div>
+                            <div>出版日：{bookInfo.publicationDate.toLocaleString()}</div>
+                            <div>ISBN13：{bookInfo.isbn13}</div>
                         </td>
                     </tr>
                 )}

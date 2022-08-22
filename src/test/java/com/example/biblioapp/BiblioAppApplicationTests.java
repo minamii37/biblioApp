@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class BiblioAppApplicationTests {
 
     @Test
-    void contextLoads() {
+    void 登録時に本の名前がない() {
+
     }
 
 }
