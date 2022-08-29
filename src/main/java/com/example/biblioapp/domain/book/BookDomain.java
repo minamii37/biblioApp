@@ -40,6 +40,10 @@ public class BookDomain {
         this.bookImgPath = bookImgPath;
     }
 
+    public BookDomain(String isbn13) {
+        this.isbn13 = isbn13;
+    }
+
     public void checkForSaving (){
         if (bookName == null || bookName.isEmpty() || bookName.isBlank()){
             throw new IllegalArgumentException("本のタイトルは必須入力項目です");

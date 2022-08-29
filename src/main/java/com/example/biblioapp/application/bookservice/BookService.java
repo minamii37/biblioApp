@@ -22,7 +22,6 @@ public class BookService implements IBookService{
         var domain = createNewBookDomainFromView(view);
         try{
             domain.checkForSaving();
-            domain.getBookImg();
             bookRepository.save(domain);
         } catch (Exception e) {
 //            HACK:メッセージだけじゃなく、param返却する自作例外を作成して、不正理由を明確にしたい
@@ -59,6 +58,13 @@ public class BookService implements IBookService{
         views.sort(Comparator.comparing((BookViewModel::getName), collator));
 
         return views;
+    }
+
+    @Override
+    public String getBookImagePath(String isbn13){
+        var domain = new BookDomain(isbn13);
+        domain.getBookImg();
+        return domain.getBookImgPath();
     }
 
     private BookDomain createNewBookDomainFromView(BookViewModel view){

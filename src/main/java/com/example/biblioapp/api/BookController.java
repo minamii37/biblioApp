@@ -26,4 +26,9 @@ public class BookController {
     public @ResponseBody Iterable<BookViewModel> getAllBooks() {
         return bookService.getAllBooks();
     }
+
+    @GetMapping(path = "/img")
+    public @ResponseBody String getBookImagePath(@RequestParam("isbn13") String isbn13) {
+        return bookService.getBookImagePath(isbn13);
+    }
 }
