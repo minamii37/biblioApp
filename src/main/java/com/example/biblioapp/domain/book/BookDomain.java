@@ -60,6 +60,9 @@ public class BookDomain {
         if (publicationDate == null) {
             throw new IllegalArgumentException("出版日は必須入力項目です");
         }
+        if (bookImgPath == null|| bookImgPath.isEmpty() || bookImgPath.isBlank()) {
+            this.bookImgPath = "https://placehold.jp/70x100.png";
+        }
     }
 
     public void getBookImg() {

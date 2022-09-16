@@ -75,6 +75,6 @@ public class BookService implements IBookService{
                 view.getAuthor(),
                 view.getPublisher(),
                 view.getPublicationDate(),
-                "");
+                view.getBookImgPath());
     }
 }

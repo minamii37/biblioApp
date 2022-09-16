@@ -1,7 +1,10 @@
 import {Box, Button, Stack, TextField} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import SearchIcon from '@mui/icons-material/Search';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import React, {useState} from "react";
 import axios from "axios";
 
@@ -24,13 +27,37 @@ const AddBook = () => {
     const [bookImgPath, setBookImgPath] = useState('')
     const [bookInfos, setBookInfos] = useState<IBookInfo[]>([])
 
+    // 書影取得外部API実行
     const handleSubmitIsbn13 = () => {
         axios.get('http://localhost:8080/biblioApp/book/img', {
             params: {
                 isbn13: isbn13
             }})
             .then(res => {
-                setDisplayBookImgPath(res.data.toString())
+                setDisplayBookImgPath(res.data.toString());
+            })
+            .catch(function (error) {
+                // 送信失敗時の処理
+                console.log(error);
+                alert("書影検索に失敗しました");
+            });
+    }
+
+    // 登録API実行
+    const handleSubmit = () => {
+        const data = {
+            name: name,
+            author: author,
+            publisher: publisher,
+            publicationDate: publicationDate,
+            isbn13: isbn13,
+            bookImgPath: bookImgPath,
+        }
+
+        axios.post('http://localhost:8080/biblioApp/book/add', data)
+            .then(res => {
+                alert("書籍登録を完了しました");
+                setBookInfos(res.data);
             })
             .catch(function (error) {
                 // 送信失敗時の処理
@@ -38,22 +65,21 @@ const AddBook = () => {
             });
     }
 
-    const handleSubmit = () => {
-        const data = {
-            name: name,
-            author: author,
-            publisher: publisher,
-            publicationDate: publicationDate,
-            isbn13: isbn13
-        }
-
-        axios.post('http://localhost:8080/biblioApp/book/add', data)
-            .then(res => {
-                setBookInfos(res.data)
-            })
-            .catch(function (error) {
-                // 送信失敗時の処理
-                console.log(error);
+    // 書影URLコピー
+    const [open, setOpen] = React.useState(false);
+    const handleTooltipClose = () => {
+        setOpen(false);
+    };
+    const handleTooltipOpen = (text: string) => {
+        copyTextToClipboard(text);
+        setOpen(true);
+    };
+    const copyTextToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function(err) {
+                console.error('Async: Could not copy text: ', err);
             });
     }
 
@@ -83,8 +109,7 @@ const AddBook = () => {
                         id="bookImgPath"
                         label="書影URL"
                         variant="standard"
-                        onChange={(event) => setBookImgPath(event.target.value)}
-                        value={bookImgPath} /></div>
+                        onChange={(event) => setBookImgPath(event.target.value)} /></div>
                     <div><TextField
                         required fullWidth
                         id="bookName"
@@ -121,7 +146,29 @@ const AddBook = () => {
                 <Box style={{marginLeft: "100px"}}>
                     {/*画像パスが存在する場合は、画像を表示する*/}
                     {displayBookImgPath && <img src={displayBookImgPath} alt="書影"/>}
-                    {displayBookImgPath &&<p>{displayBookImgPath}</p>}
+                    {displayBookImgPath &&
+                        <p>
+                            {displayBookImgPath}
+                            <ClickAwayListener onClickAway={handleTooltipClose}>
+                                <Tooltip
+                                    placement="right"
+                                    PopperProps={{
+                                        disablePortal: true,
+                                    }}
+                                    onClose={handleTooltipClose}
+                                    open={open}
+                                    disableFocusListener
+                                    disableHoverListener
+                                    disableTouchListener
+                                    title="copied!"
+                                >
+                                    <IconButton onClick={() => handleTooltipOpen(displayBookImgPath)}>
+                                        <AssignmentIcon />
+                                    </IconButton>
+                            </Tooltip>
+                            </ClickAwayListener>
+                        </p>
+                    }
                 </Box>
             </Stack>
         </div>
